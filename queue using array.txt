@@ -1,0 +1,99 @@
+
+
+//Implementing Queue Data Structure using C language
+
+#include<stdio.h>
+#include<stdlib.h>
+#define size 10
+
+int rear = -1;
+int front = -1;
+int queue[size];
+
+
+void Enqueue()
+{
+    if(rear==size-1)
+        printf("Queue is Full!");
+    else
+    {
+        int data;
+        printf("Enter value :");
+        scanf("%d",&data);
+        if(front==-1)
+            front=0;
+        rear++;
+        queue[rear] = data;
+        printf("Data Enqueued Successfully!\n");
+    }
+}
+
+void Dequeue()
+{
+    if(front==-1 || front>rear)
+        printf("Queue is Empty!\n");
+    else
+    {
+        front++;
+        printf("Data is Dequeued Successfully!\n");
+    }
+}
+void Peek()
+{
+   if(front==-1 || front>rear)
+        printf("Queue is Empty!\n");
+   else
+        printf("Peek Element : %d \n",queue[front]);
+}
+
+void Display()
+{
+    if(front==-1 || front>rear)
+        printf("Queue is Empty!");
+    else
+    {
+        int i;
+        printf("Elements : ");
+        for(i=front;i<=rear;i++)
+        {
+            printf("%d ",queue[i]);
+        }
+        printf("\n");
+    }
+}
+
+
+
+
+
+
+
+
+int main()
+{
+    printf("Queue Implementation!\n");
+    while(1)
+    {
+        int option;
+        printf("Choose operation:\n1)Enqueue 2)Dequeue 3)Peek 4)Display 5)Exit\nEnter Option:");
+        scanf("%d",&option);
+        if(option == 1)
+            Enqueue();
+        else if(option==2)
+            Dequeue();
+        else if(option == 3)
+            Peek();
+        else if(option ==4)
+            Display();
+        else
+            break;
+    }
+    return 0;
+}
+
+
+
+
+
+
+

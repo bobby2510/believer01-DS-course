@@ -1,0 +1,146 @@
+#includestdio.h
+#includestdlib.h
+
+struct node{
+    int data;
+    struct node left;
+    struct node right;
+};
+void print_list(struct node head){
+        struct node p = head;
+        if(p == NULL )
+             printf(List is Empty!n);
+        else
+        {
+            printf(Elements  );
+            while(p!=NULL)
+            {
+                printf(%d ,p-data);
+                p = p-right;
+            }
+            printf(n);
+    }
+}
+void insertion_at_end(struct node head){
+    int value;
+    printf(Enter value );
+    scanf(%d,&value);
+    struct node  temp = (struct node)malloc(sizeof(struct node));
+    temp-data = value;
+    temp-right = NULL;
+    temp-left = NULL;
+    struct node p = head;
+    if(p == NULL)
+        head = temp;
+    else
+    {
+        while(p-right != NULL)
+        {
+            p = p-right;
+        }
+        p-right = temp;
+        temp-left = p;
+    }
+    printf(Value is inserted successfully!n);
+}
+
+void insertion_at_specified_position(struct node head)
+{
+    int position,value;
+    printf(Enter position and value );
+    scanf(%d%d,&position,&value);
+    struct node temp = (struct node)malloc(sizeof(struct node));
+    temp-data = value;
+    temp-right = NULL;
+    temp-left = NULL;
+    struct node p = head;
+    int cnt=1;
+    while(p!=NULL)
+    {
+        if(position==cnt)
+            break;
+        p = p-right;
+        cnt++;
+    }
+    if(p==NULL)
+    {
+        printf(Invalid positionn);
+    }
+    else{
+
+    temp-right = p-right;
+    p-right-left = temp;
+    p-right = temp;
+    temp-left = p;
+    printf(Value inserted at specified position successfully!n);
+    }
+}
+
+void deletion(struct node head)
+{
+    int value;
+    printf(Enter value );
+    scanf(%d,&value);
+    struct node p = head;
+    while(p!=NULL)
+    {
+        if(p-data == value)
+            break;
+        p = p-right;
+    }
+    if(p==NULL)
+        printf(Value is already not present!n);
+    else
+    {
+        struct node q = p-left;
+        if(q==NULL)  if we are deleting first node of the list
+        {
+            if(p-right == NULL)
+                head = NULL;
+            else
+            {
+                head = p-right;
+                p-right-left = NULL;
+            }
+        }
+        else
+        {
+            q-right = p-right;
+            if(p-right != NULL)
+                p-right-left = q;
+            p-right = NULL;
+            p-left = NULL;
+            free(p);
+        }
+        printf(Value deleted successfully!n);
+    }
+
+}
+
+int main(){
+    printf(Doubly linked list implementation!n);
+    struct node head = NULL;
+
+    while(1)
+    {
+        int option;
+        printf(Choose operationn1)Insertion at endn2)Insertion at specified postionn3)Deletionn4)Searchn5)Print the listn6)ExitnEnter option);
+        scanf(%d,&option);
+        if(option == 1)
+            insertion_at_end(&head);
+        else if(option ==2)
+            insertion_at_specified_position(&head);
+        else if(option ==3)
+            deletion(&head);
+        else if(option ==4)
+            printf(Searchn);
+        else if(option ==5)
+            print_list(&head);
+        else
+            break;
+
+    }
+
+
+    return 0;
+}

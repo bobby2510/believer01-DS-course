@@ -1,0 +1,85 @@
+
+
+//Stack implementation using Arrays
+#include<stdio.h>
+#include<stdlib.h>
+#define size 5
+
+int stack[size];
+int top = -1;
+
+void push()
+{
+    if(top == size-1)
+        printf("Stack is Full!");
+    else
+    {
+        int value;
+        printf("Enter value :");
+        scanf("%d",&value);
+        top++;
+        stack[top] = value;
+        printf("Value is pushed successfully!\n");
+    }
+}
+
+void pop()
+{
+    if(top == -1)
+        printf("Stack is Empty!");
+    else
+    {
+        top--;
+        printf("Value is removed Successfully!\n");
+    }
+}
+
+void peek()
+{
+    if(top == -1)
+        printf("stack is empty!\n");
+    else
+    {
+        printf("Peek Value : %d\n",stack[top]);
+    }
+}
+
+void display()
+{
+    if(top == -1)
+        printf("Stack is Empty!\n");
+    else
+    {
+        int i;
+        for(i=0;i<=top;i++)
+            printf("%d ",stack[i]);
+    }
+}
+
+int main()
+{
+    printf("Stack Implementation:\n");
+    while(1)
+    {
+        int option;
+        printf("Choose option : 1) push  2) pop 3) peek 4)display 5)exit\nEnter option :");
+        scanf("%d",&option);
+        if(option == 1)
+            push();
+        else if(option == 2)
+            pop();
+        else if(option == 3)
+            peek();
+        else if(option == 4)
+            display();
+        else
+            break;
+
+    }
+    return 0;
+}
+
+
+
+
+

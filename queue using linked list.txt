@@ -1,0 +1,86 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *link;
+};
+struct node *front = NULL;
+struct node *rear = NULL;
+
+void Enqueue(int value)
+{
+    struct node *temp = (struct node*)malloc(sizeof(struct node*));
+    temp->data = value;
+    temp->link = NULL;
+    if(front==NULL)
+    {
+        front = rear = temp;
+    }
+    else
+    {
+        rear->link = temp;
+        rear = temp;
+    }
+    printf("Value Enqueued Successfully!\n");
+}
+
+void Dequeue()
+{
+    if(front==NULL)
+        printf("Queue is Already Empty!\n");
+    else
+    {
+        struct node *temp = front;
+        front = front->link;
+        temp->link= NULL;
+        free(temp);
+        if(front== NULL)
+          rear = NULL;
+        printf("Value Dequeued Successfully!\n");
+    }
+}
+
+void peek()
+{
+     if(front==NULL)
+        printf("Queue is Already Empty!\n");
+    else
+        printf("Peek Element : %d\n",front->data);
+}
+
+void display()
+{
+    if(front==NULL)
+        printf("Queue is Already Empty!\n");
+    else
+    {
+        struct node *p = front;
+        printf("Queue Elements : ");
+        while(p!= NULL)
+        {
+            printf("%d ",p->data);
+            p = p->link;
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    Enqueue(10);
+    Enqueue(20);
+    Enqueue(30);
+    display();
+    Dequeue();
+    display();
+    peek();
+
+    return 0;
+}
+
+
+
+
+
